@@ -1,8 +1,17 @@
+"""Helper methods for Symbolic Abstraction analysis of straight-line programs.
+"""
 import z3
 from algorithms import bilateral
 
 class Program:
+    """Represents a straight-line program in 2-operand notation.
+    """
     def __init__(self, program):
+        """Initialize the program from a string @program.
+
+        See example_program.py for an example of the two-operand notation we
+        support.
+        """
         program = [
             line.strip() for line in program.split("\n") if line.strip()]
         program = [line.split(" ") for line in program]
@@ -10,7 +19,7 @@ class Program:
         # (inout, op, in)
         assert all(len(statement) == 3 for statement in program)
 
-        inouts, ops, ins = zip(*program)
+        inouts, _ops, ins = zip(*program)
         self.variables = set(inouts) | set(ins)
         self.variables = sorted(variable for variable in self.variables
                                 if not variable.isdigit())
@@ -64,6 +73,8 @@ class Program:
         self.z3_formula = z3.And(*z3_statements)
 
     def transform(self, domain, input_abstract_state):
+        """Compute the most precise output abstract state.
+        """
         def add_primes(unprimed):
             return unprimed + (self.prime_depth * "'")
 

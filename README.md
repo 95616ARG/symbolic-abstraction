@@ -41,9 +41,10 @@ following `make` rule:
 make docker-test
 ```
 
-Alternatively, if you have an up-to-date version of Python 3 and Pytest
-installed you can run
+Alternatively, if you have an up-to-date version of Python 3 installed you can
+run
 ```
+pip3 install --user pytest z3-solver
 python3 -m pytest tests
 ```
 

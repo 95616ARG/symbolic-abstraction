@@ -40,3 +40,14 @@ class AbstractState:
         """Determines if self and rhs represent different AbstractStates.
         """
         return not self == rhs
+
+    def translate(self, translation):
+        """Rename variables in the abstract state.
+
+        Used in frontend/program.py to deal with "primes," i.e. we might encode
+        x += y as x' = x + y, y' = y, but the interface we want is that the
+        final abstract state should be written in terms of x and y. So we
+        translate the abstract state in terms of x', y' by the translation
+        dictionary {"x'": "x", "y'": "y"}.
+        """
+        raise NotImplementedError

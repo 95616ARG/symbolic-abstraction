@@ -1,15 +1,12 @@
 """Main class definition for the Intervals conjunctive domain.
-
-TODO(masotoud): fix the docstrings re: sign.
 """
 import z3
-from .abstract import Interval, IntervalAbstractState
 from domains.z3_variables import Z3VariablesDomain
+from .abstract import Interval, IntervalAbstractState
 
 class IntervalDomain(Z3VariablesDomain):
-    """Represents an abstract space over the sign of variables.
+    """Represents an abstract space over the intervals of variables.
     """
-
     def __init__(self, variables):
         """Constructs a new IntervalDomain, with variables named in variables.
 
@@ -70,9 +67,9 @@ class IntervalDomain(Z3VariablesDomain):
         superset of upper.
 
         Note that this is a fairly "simple" abstract consequence, in that it
-        sets only one variable to a non-top sign. This improves performance of
-        the SMT solver in many cases. In certain cases, other choices for the
-        abstract consequence will lead to better algorithm performance.
+        sets only one variable to a non-top interval. This improves performance
+        of the SMT solver in many cases. In certain cases, other choices for
+        the abstract consequence will lead to better algorithm performance.
         """
         for variable in self.variables:
             proposed = self.top.copy()

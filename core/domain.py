@@ -96,3 +96,16 @@ class ConjunctiveDomain:
         Guaranteed by Definition 3.1
         """
         raise NotImplementedError
+
+    def translate(self, translation):
+        """Rename variables in the abstract space definition.
+
+        Used in frontend/program.py to deal with "primes." We might encode x +=
+        y as x' = x + y, y' = y, but the user will give us a domain in terms of
+        x and y (which implicitly should refer to x' and y' at the end of the
+        program snippet). So we translate the abstract domain given by the user
+        in terms of x, y by the translation dictionary {"x": "x'", "y": "y'"}.
+        Note that we use AbstractState.translate(...) to translate back to the
+        user's preferred naming (x, y).
+        """
+        raise NotImplementedError
